@@ -1,0 +1,95 @@
+
+    <hr class="no-grid-gutter-h grid-gutter-margin-b no-margin-t">
+
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">   
+<!-- 6. $EASY_PIE_CHARTS ===========================================================================
+
+				Easy Pie charts
+-->
+				<!-- Javascript -->
+				<script>
+					init.push(function () {
+						// Easy Pie Charts
+						var easyPieChartDefaults = {
+							animate: 2000,
+							scaleColor: false,
+							lineWidth: 6,
+							lineCap: 'square',
+							size: 90,
+							trackColor: '#e5e5e5'
+						}
+						$('#easy-pie-chart-1').easyPieChart($.extend({}, easyPieChartDefaults, {
+							barColor: PixelAdmin.settings.consts.COLORS[1]
+						}));
+						$('#easy-pie-chart-2').easyPieChart($.extend({}, easyPieChartDefaults, {
+							barColor: PixelAdmin.settings.consts.COLORS[1]
+						}));
+						$('#easy-pie-chart-3').easyPieChart($.extend({}, easyPieChartDefaults, {
+							barColor: PixelAdmin.settings.consts.COLORS[1]
+						}));
+					});
+				</script>
+				<!-- / Javascript -->
+
+				<div class="row">
+					<div class="col-xs-4">
+						<!-- Centered text -->
+						<div class="stat-panel text-center">
+							<div class="stat-row">
+								<!-- Dark gray background, small padding, extra small text, semibold text -->
+								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
+									<i class="fa fa-globe"></i>&nbsp;&nbsp;Average Session Duration
+								</div>
+							</div> <!-- /.stat-row -->
+							<div class="stat-row">
+								<!-- Bordered, without top border, without horizontal padding -->
+								<div class="stat-cell bordered no-border-t no-padding-hr">
+									<div class="pie-chart" data-percent="50" id="easy-pie-chart-1">
+										
+										<div class="pie-chart-label">{{average_statistics.averageSessionDuration}}</div>
+									</div>
+								</div>
+							</div> <!-- /.stat-row -->
+						</div> <!-- /.stat-panel -->
+					</div>
+					<div class="col-xs-4">
+						<div class="stat-panel text-center">
+							<div class="stat-row">
+								<!-- Dark gray background, small padding, extra small text, semibold text -->
+								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
+									<i class="fa fa-flash"></i>&nbsp;&nbsp;PICK LOAD
+								</div>
+							</div> <!-- /.stat-row -->
+							<div class="stat-row">
+								<!-- Bordered, without top border, without horizontal padding -->
+								<div class="stat-cell bordered no-border-t no-padding-hr">
+									<div class="pie-chart" data-percent="93" id="easy-pie-chart-2">
+										<div class="pie-chart-label">93%</div>
+									</div>
+								</div>
+							</div> <!-- /.stat-row -->
+						</div> <!-- /.stat-panel -->
+					</div>
+					<div class="col-xs-4">
+						<div class="stat-panel text-center">
+							<div class="stat-row">
+								<!-- Dark gray background, small padding, extra small text, semibold text -->
+								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
+									<i class="fa fa-cloud"></i>&nbsp;&nbsp;USED RAM
+								</div>
+							</div> <!-- /.stat-row -->
+							<div class="stat-row">
+								<!-- Bordered, without top border, without horizontal padding -->
+								<div class="stat-cell bordered no-border-t no-padding-hr">
+									<div class="pie-chart" data-percent="75" id="easy-pie-chart-3">
+										<div class="pie-chart-label">12GB</div>
+									</div>
+								</div>
+							</div> <!-- /.stat-row -->
+						</div> <!-- /.stat-panel -->
+					</div>
+				</div>
+			</div>
+<!-- /6. $EASY_PIE_CHARTS -->
+      </div>

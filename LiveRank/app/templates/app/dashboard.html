@@ -1,0 +1,89 @@
+﻿{% extends "app/layout.html" %}
+
+{% block layout_content %}
+
+<div class="page-header">
+			
+	<div class="row">
+		<!-- Page header, center on small screens -->
+		<div class="col-xs-12 col-sm-12 text-center text-center-sm">
+            <h1><i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;Dashboard</h1>
+        </div>
+	</div>
+</div> <!-- / .page-header -->
+{%if RankedPlayers %}
+<div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+        
+        <!-- Success table -->
+	    <div class="table-success">
+            <div class="table-header">
+			    <div class="table-caption">
+				    Ranked Players
+			    </div>
+		    </div>
+		    <table class="table table-bordered">
+			    <thead>
+				    <tr>
+					    <th>Rank</th>
+					    <th>Player</th>
+					    <th>Email</th>
+                        <th>Phone</th>
+				    </tr>
+			    </thead>
+			    <tbody>
+                    {%for Player in RankedPlayers%}
+				    <tr>
+					    <td>{{Player.rank}}</td>
+					    <td>{{Player.first_name}} {{Player.last_name}}</td>
+					    <td>{{Player.username}}</td>
+					    <td>{{Player.contact}}</td>
+				    </tr>				 
+                    {%endfor%}
+			    </tbody>
+		    </table>
+	    </div>
+	    <!-- / Success table -->
+
+   </div>
+</div>
+{%endif%}
+{%if UnrankedPlayers %}
+<div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+        <!-- Success table -->
+	    <div class="table-primary">
+            <div class="table-header">
+			    <div class="table-caption">
+				    Unranked Players
+			    </div>
+		    </div>
+		    <table class="table table-bordered">
+			    <thead>
+				    <tr>
+					    <th>Rank</th>
+					    <th>Player</th>
+					    <th>Email</th>
+                        <th>Phone</th>
+				    </tr>
+			    </thead>
+			    <tbody>
+                    {%for Player in UnrankedPlayers%}
+				    <tr>
+					    <td>{{Player.rank}}</td>
+					    <td>{{Player.first_name}} {{Player.last_name}}</td>
+					    <td>{{Player.username}}</td>
+					    <td>{{Player.contact}}</td>
+				    </tr>				 
+                    {%endfor%}
+			    </tbody>
+		    </table>
+	    </div>
+	    <!-- / Success table -->
+
+   </div>
+</div>
+{%endif%}
+
+{% endblock %}

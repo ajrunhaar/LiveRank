@@ -1,0 +1,160 @@
+﻿{% extends "app/layout.html" %}
+
+{% block layout_content %}
+
+<div class="page-header">
+			
+	<div class="row">
+		<!-- Page header, center on small screens -->
+		<div class="col-xs-12 col-sm-12 text-center text-center-sm">
+            <h1><i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;Ranking Management</h1>
+        </div>
+	</div>
+</div> <!-- / .page-header -->
+{%if Players %}
+<div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+        
+        <!-- Success table -->
+	    <div class="table-success" id="rankings_table">
+            <div class="table-header">
+			    <div class="table-caption">
+				    Ranked Players
+			    </div>
+		    </div>
+
+            <div id="tabs">
+		    <table class="table table-bordered">
+			    <thead>
+				    <tr>
+                        <th>Player</th>
+					    <th>Current Rank</th>
+                        <th>New Rank</th>
+					    
+				    </tr>
+			    </thead>
+			    <tbody>
+                    {%for Player in Players%}
+				    <tr>
+                        <td>{{Player.first_name}} {{Player.last_name}}</td>
+					    <td>{{Player.rank}}</td>
+                        <td>
+
+                            <select class="form-control form-group-margin" form="ranking_form" id="{{Player.username}}" name="{{Player.username}}" onchange="checkDuplicates()">
+                                 <option selected>None</option>
+                                {%for i in PlayersRange%}
+                                    {%if i == Player.rank%}
+								        <option selected>{{i}}</option>
+                                    {%else%}
+                                        <option>{{i}}</option>
+                                    {%endif%}
+								{%endfor%}
+                               
+
+							</select>                       </td>				    
+				    </tr>				 
+                    {%endfor%}
+			    </tbody>
+		    </table>
+                </div>
+	    </div>
+	    <!-- / Success table -->
+        <form action="/rankings" id="ranking_form" method="post">
+            {%csrf_token%}
+            <button type ="submit" class="btn btn-success btn-rounded">Submit</button>
+        </form>
+   </div>
+</div>
+
+<script type="text/javascript">
+    // Disable function
+
+    function checkDuplicates() {
+        var selects = document.getElementsByTagName("select"),
+            i,
+            current,
+            selected = {};
+        for (i = 0; i < selects.length; i++) {
+            current = selects[i].selectedIndex;
+            // Enabled with:
+            $('button').prop('disabled', false);
+            if (selected[current]) {
+                //alert("Each address type may not be selected more than once.");
+                // Disabled with:
+                $('button').prop('disabled', true);
+                return false;
+            } else
+                selected[current] = true;
+        }
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+
+
+
+	// Sort table
+    init.push(function () {
+
+        /*
+        //Makes the table drage and droppable
+        $("#tabs").tabs();
+
+        $("tbody").sortable({
+            appendTo: "parent",
+            helper: "clone"
+        }).disableSelection();
+
+        $("#tabs ul li a").droppable({
+            hoverClass: "drophover",
+            tolerance: "pointer",
+            drop: function (e, ui) {
+                var tabdiv = $(this).attr("href");
+                $(tabdiv + " table tr:last").after("<tr>" + ui.draggable.html() + "</tr>");
+                ui.draggable.remove();
+            }
+        });
+        */
+
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("rankings_table");
+        switching = true;
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.getElementsByTagName("TR");
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1) ; i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[1];
+                y = rows[i + 1].getElementsByTagName("TD")[1];
+                //check if the two rows should switch place:
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    });
+</script>
+
+
+
+{%endif%}
+
+
+{% endblock %}
